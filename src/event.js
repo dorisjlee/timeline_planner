@@ -1,4 +1,4 @@
-
+var json_event_lst =[];
 /**
    * Load Google Calendar client library. List upcoming events
    * once client library is loaded.
@@ -7,31 +7,30 @@
     gapi.client.load('calendar', 'v3', listUpcomingEvents);
   }
 
-  /**
-   * Print the summary and start datetime/date of the next ten events in
-   * the authorized user's calendar. If no events are found an
-   * appropriate message is printed.
-   */
-  var d = new Date();//Start from Now - 2 months
-  d.setMonth(d.getMonth() - 2);
-
+  
+  
   function listUpcomingEvents() {
+    /**
+     * Print the summary and start datetime/date of the next ten events in
+     * the authorized user's calendar. If no events are found an
+     * appropriate message is printed.
+     */
+    gapi.client.load('calendar', 'v3')//, listUpcomingEvents);
     var request = gapi.client.calendar.events.list({
       'calendarId': 'primary',
-      'timeMin': d.toISOString(),
+      'timeMin': startdate.toISOString(),
       'showDeleted': false,
       'singleEvents': true,
-      'maxResults': 10,
+      'maxResults': 100,
       'orderBy': 'startTime'
     });
 
     //{id: 4, content: 'item 4', start: new Date(2013, 3, 16), end: new Date(2013, 3, 19)},
-    var json_event_lst = []; //list of JSON event data 
+    json_event_lst = []; //list of JSON event data 
     request.execute(function(resp) {
       console.log(resp)
       var events = resp.items;
       appendPre('Upcoming events:');
-      
       
       if (events.length > 0) {
         for (i = 0; i < events.length; i++) {
@@ -62,10 +61,9 @@
         appendPre('No upcoming events found.');
       }
       
-      
     });
-    console.log(json_event_lst)
-    return json_event_lst
+    //console.log(json_event_lst)
+    //return json_event_lst
   }
 
   /**
