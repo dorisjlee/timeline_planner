@@ -28,7 +28,6 @@ var json_event_lst =[];
     //{id: 4, content: 'item 4', start: new Date(2013, 3, 16), end: new Date(2013, 3, 19)},
     json_event_lst = []; //list of JSON event data 
     request.execute(function(resp) {
-      console.log(resp)
       var events = resp.items;
       appendPre('Upcoming events:');
       
@@ -64,6 +63,7 @@ var json_event_lst =[];
     });
     //console.log(json_event_lst)
     //return json_event_lst
+    renderTimeline();
   }
 
   /**

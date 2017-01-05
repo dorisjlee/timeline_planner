@@ -1,3 +1,4 @@
+var event_data;
 var container = document.getElementById('visualization');
 var options = {
 	editable: true,
@@ -61,12 +62,14 @@ var options = {
 	}
 };
 
-//var items = listUpcomingEvents();
-var timeline = new vis.Timeline(container, json_event_lst, options);
-json_event_lst.on('*', function (event, properties) {
-	logEvent(event, properties);
-});
-
+function renderTimeline(){
+	//var items = listUpcomingEvents();
+	event_data = new vis.DataSet(json_event_lst);
+	var timeline = new vis.Timeline(container, event_data, options);
+	event_data.on('*', function (event, properties) {
+		logEvent(event, properties);
+	});
+}
 function logEvent(event, properties) {
 var log = document.getElementById('log');
 var msg = document.createElement('div');
