@@ -20,6 +20,7 @@
   <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
   <script src="authorize.js"></script>
   <script src="event.js"></script>
+  <script src="timeline.js"></script>
 </head>
 <body>
 
@@ -39,6 +40,7 @@
 <pre id="output"></pre>
 
 <script type="text/javascript">
+  var container = document.getElementById('visualization');
   // note that months are zero-based in the JavaScript Date object, so month 3 is April
   // var items = new vis.DataSet([
   //   {id: 1, content: 'item 1', start: new Date(2013, 3, 20)},
@@ -54,7 +56,5 @@
   enddate.setMonth(enddate.getMonth() + 1);
 
 </script>
-<script src="timeline.js"></script>
-
 </body>
 </html>

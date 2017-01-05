@@ -1,5 +1,5 @@
 var event_data;
-var container = document.getElementById('visualization');
+
 var options = {
 	editable: true,
 
