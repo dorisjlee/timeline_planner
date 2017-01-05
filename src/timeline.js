@@ -1,3 +1,7 @@
+var startdate = new Date();//Start from Now - 2 months
+startdate.setMonth(startdate.getMonth() - 2);
+var enddate = new Date()//End from Now + 2 months
+enddate.setMonth(enddate.getMonth() + 2);
 var event_data;
 
 var options = {

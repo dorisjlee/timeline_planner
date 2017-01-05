@@ -18,7 +18,7 @@ var json_event_lst =[];//list of JSON event data
       'timeMin': startdate.toISOString(),
       'showDeleted': false,
       'singleEvents': true,
-      'maxResults': 10,
+      'maxResults': 100,
       'orderBy': 'startTime'
     });
 
@@ -34,7 +34,7 @@ var json_event_lst =[];//list of JSON event data
           json_event.id=i+1;
           json_event.content=event.summary;
           var stime = new Date(event.start.dateTime);
-          if (!stime) {
+          if (isNaN(stime.valueOf())) {
             //For all day events
             stime = new Date(event.start.date);
           }
@@ -42,11 +42,13 @@ var json_event_lst =[];//list of JSON event data
           // appendPre(event.summary + ' (' + stime + ')')
 
           var etime = new Date(event.end.dateTime);
-          if (!etime) {
+          if (isNaN(etime.valueOf())) {
             //For all day events
             etime = new Date(event.end.date);
           }
-          if (etime) { 
+          if ((etime-stime)/1000/3600/24==1){
+            // if duration is one day, don't add a enddate, treat it as a day event 
+          // if (! isNaN(etime.valueOf())) { 
             //if etime not null then write it as a JSON field, otherwise, don't add the end field
             json_event.end =etime;  
           }
