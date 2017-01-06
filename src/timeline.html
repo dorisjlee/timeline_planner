@@ -10,14 +10,14 @@
     }
   </style>
 
-  <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
-  <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css"/>
+  <script src="../resources/sweetalert.min.js"></script>
+  <link href="../resources/sweetalert.css" rel="stylesheet" type="text/css"/>
 
   <script src="../resources/vis.min.js"></script>
   <link href="../resources/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-  <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+  <script src="../resources/jquery.min.js"></script>
+  <script src="../resources/jquery-ui.js"></script>
+  <script src="../resources/client.js"></script>
   <script src="authorize.js"></script>
   <script src="event.js"></script>
   <script src="timeline.js"></script>
@@ -31,7 +31,7 @@
   </div>
 
 <p style="max-width: 800px;">
-  This example shows how to use callback functions <code>onAdd</code>, <code>onMove</code>, <code>onMoving</code>, <code>onUpdate</code>, and <code>onRemove</code>. The <code>onMoving</code> function updates an item while dragging, and can be used to prevent the item from being drawn at disallowed or infeasible timeslots. In this example, the items cannot be moved outside of the month April 2013. The other callback functions are called after an add, move, update, or remove action has taken place, and can be used to cancel these actions.
+  Timeline visualization of Google Calendar Events
 </p>
 
 <div id="visualization"></div>
@@ -41,17 +41,6 @@
 
 <script type="text/javascript">
   var container = document.getElementById('visualization');
-  // note that months are zero-based in the JavaScript Date object, so month 3 is April
-  // var items = new vis.DataSet([
-  //   {id: 1, content: 'item 1', start: new Date(2013, 3, 20)},
-  //   {id: 2, content: 'item 2', start: new Date(2013, 3, 14)},
-  //   {id: 3, content: 'item 3', start: new Date(2013, 3, 18)},
-  //   {id: 4, content: 'item 4', start: new Date(2013, 3, 16), end: new Date(2013, 3, 19)},
-  //   {id: 5, content: 'item 5', start: new Date(2013, 3, 25)},
-  //   {id: 6, content: 'item 6', start: new Date(2013, 3, 27)}
-  // ]);
-  
-
 </script>
 </body>
 </html>

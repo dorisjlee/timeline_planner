@@ -1,7 +1,7 @@
 var startdate = new Date();//Start from Now - 2 months
 startdate.setMonth(startdate.getMonth() - 2);
-var enddate = new Date()//End from Now + 2 months
-enddate.setMonth(enddate.getMonth() + 2);
+var enddate = new Date()//End from Now + 2 Year
+enddate.setMonth(enddate.getYear() + 2);
 var event_data;
 
 var options = {
@@ -65,7 +65,26 @@ var options = {
 	  });
 	}
 };
+function addEvent(summary){
+	var event = {
+	  'summary': summary,
+	  'description': 'A chance to hear more about Google\'s developer products.',
+	  'start': {
+	    'dateTime': '2015-05-28T09:00:00-07:00'
+	  },
+	  'end': {
+	    'dateTime': '2015-05-28T17:00:00-07:00'
+	  },
+	};
+	var request = gapi.client.calendar.events.insert({
+	  'calendarId': 'primary',
+	  'resource': event
+	});
 
+	request.execute(function(event) {
+	  appendPre('Event created: ' + event.htmlLink);
+	});
+}
 function renderTimeline(){
 	//var items = listUpcomingEvents();
 	event_data = new vis.DataSet(json_event_lst);

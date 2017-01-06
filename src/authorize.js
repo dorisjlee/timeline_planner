@@ -75,3 +75,12 @@ function handleAuthClick(event) {
     handleAuthResult);
   return false;
 }
+
+
+function autoAuth() {
+  //Attempt to make authorization automatic without a click
+  gapi.auth.authorize(
+    {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+    handleAuthResult);
+  return false;
+}
