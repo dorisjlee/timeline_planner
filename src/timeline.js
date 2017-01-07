@@ -12,6 +12,7 @@ var options = {
 	    if (value) {
 	      item.content = value;
 	      callback(item); // send back adjusted new item
+	      addEvent(item); //update on GCal
 	    }
 	    else {
 	      callback(null); // cancel item creation
@@ -68,19 +69,23 @@ var options = {
       return a.value - b.value;
     }
 };
-function addEvent(summary){
+function addEvent(item){
+	//Adding all-day events 
+	var end = new Date(item.start);
+	end.setDate(item.start.getDate()+1)
 	var event = {
-	  'summary': summary,
-	  'description': 'A chance to hear more about Google\'s developer products.',
+	  'summary': item.content,
 	  'start': {
-	    'dateTime': '2015-05-28T09:00:00-07:00'
+	    'dateTime': item.start.toJSON(),
+    	'timeZone': 'America/Los_Angeles'
 	  },
 	  'end': {
-	    'dateTime': '2015-05-28T17:00:00-07:00'
-	  },
+	    'dateTime': end.toJSON(),
+	    'timeZone': 'America/Los_Angeles'
+	  }
 	};
 	var request = gapi.client.calendar.events.insert({
-	  'calendarId': 'primary',
+	  'calendarId': calendarNameIds[calendarNames[item.group]],
 	  'resource': event
 	});
 
