@@ -7,7 +7,7 @@ var json_event_lst =[];//list of JSON event data
     gapi.client.load('calendar', 'v3', listCalendars);    
   }
 
-  function loadEventsFromCalendar(calendarId,calendarName) {
+  function loadEventsFromCalendar(calendarId,calendarName,renderVis=false) {
     // Add events from calendar corresponding to the given calendarId into json_event_lst. 
     var request = gapi.client.calendar.events.list({
       'calendarId': calendarId,
@@ -20,12 +20,13 @@ var json_event_lst =[];//list of JSON event data
 
     //{id: 4, content: 'item 4', start: new Date(2013, 3, 16), end: new Date(2013, 3, 19)},
     request.execute(function(resp) {
+      // var dfd = $.Deferred();
       var events = resp.items;
       appendPre('Upcoming events:');
-      
+      var json_event;
       if (events.length > 0) {
         for (i = 0; i < events.length; i++) {
-          var json_event = {};
+          json_event= {};
           var event = events[i];
           json_event.id = json_event_lst.length+1;
           json_event.content = event.summary;
@@ -51,11 +52,17 @@ var json_event_lst =[];//list of JSON event data
             json_event.end =etime;  
           }
           json_event_lst.push(json_event)
+          // dfd.resolve();
+          // return dfd.promise()
         }
       } else {
         appendPre('No upcoming events found.');
       }
+      if (renderVis){
+        renderTimeline();
+      } 
     });
+    // return request
   }
   
   /**

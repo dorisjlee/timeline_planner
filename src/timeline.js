@@ -89,7 +89,6 @@ function addEvent(summary){
 	});
 }
 function renderTimeline(){
-	//var items = listUpcomingEvents();
 	event_data = new vis.DataSet(json_event_lst);
 	// Specify properties of groups (calendars)
 	// values indicate the ordering of the calendars in the visualization
@@ -104,8 +103,6 @@ function renderTimeline(){
 	event_data.on('*', function (event, properties) {
 		logEvent(event, properties);
 	});
-	
-	
 }
 function logEvent(event, properties) {
 var log = document.getElementById('log');
