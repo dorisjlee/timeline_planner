@@ -45,7 +45,8 @@ var json_event_lst =[];//list of JSON event data
             //For all day events
             etime = new Date(event.end.date);
           }
-          if ((etime-stime)/1000/3600/24==1){
+          console.log(etime-stime);
+          if ((etime-stime)/1000/3600/24!=1){
             // if duration is one day, don't add a enddate, treat it as a day event 
           // if (! isNaN(etime.valueOf())) { 
             //if etime not null then write it as a JSON field, otherwise, don't add the end field

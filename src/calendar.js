@@ -1,5 +1,7 @@
 var calendarNameIds;
-var calendarNames = ['Long Term (Personal)','Long Term (Work)','Schedule']
+var calendarNames = ['Long Term (Personal)','Long Term (Work)','Schedule'] //calendars to plot 
+// // For debugging 
+// var calendarNames = ['Long Term (Work)'] 
 function listCalendars()
 {
 	//Retreive calendarID used for retreiving events in the calendar and summary (name) of the calendar
