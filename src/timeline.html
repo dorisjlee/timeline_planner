@@ -22,26 +22,34 @@
   <script src="event.js"></script>
   <script src="timeline.js"></script>
   <script src="calendar.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<ul id="menubar">
+  <li>
+    <ul id="calendarSelect">
+      Select Calendars: 
+      <li><input type="checkbox" onclick="return selectCalendar(this)" id="Long Term (Personal)">  Personal </li>
+      <li><input type="checkbox" onclick="return selectCalendar(this)" id="Long Term (Work)"> Work</li>
+      <li><input type="checkbox" onclick="return selectCalendar(this)" id="Schedule">  Schedule</li>
+    </ul>
+  </li>
 
-  <div id="authorize-div" >
-    <button id="authorize-button" onclick="handleAuthClick(event)">
-      Authorize
-    </button>
-  </div>
+  <li>
+    <div id="authorize-div" >
+      <button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>
+    </div>
+  </li>
+</ul>
 
-<p style="max-width: 800px;">
-  Timeline visualization of Google Calendar Events
-</p>
+  
+
+
 
 <div id="visualization"></div>
 <p></p>
 <div id="log"></div>
 <pre id="output"></pre>
 
-<script type="text/javascript">
-  var container = document.getElementById('visualization');
-</script>
 </body>
 </html>

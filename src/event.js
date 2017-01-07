@@ -43,7 +43,6 @@ var json_event_lst =[];//list of JSON event data
             //For all day events
             etime = new Date(event.end.date);
           }
-          console.log(etime-stime);
           if ((etime-stime)/1000/3600/24!=1){
             // otherwise, if duration is one day, don't add a enddate, treat it as a day event(no enddate)
             json_event.end =etime;  

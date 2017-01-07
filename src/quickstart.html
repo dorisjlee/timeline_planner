@@ -59,7 +59,7 @@
        * once client library is loaded.
        */
       function loadCalendarApi() {
-        gapi.client.load('calendar', 'v3', listUpcomingEvents);
+        gapi.client.load('calendar', 'v3', loadEventsFromCalendar);
       }
 
       /**
@@ -67,7 +67,7 @@
        * the authorized user's calendar. If no events are found an
        * appropriate message is printed.
        */
-      function listUpcomingEvents() {
+      function loadEventsFromCalendar() {
         var request = gapi.client.calendar.events.list({
           'calendarId': 'primary',
           'timeMin': (new Date()).toISOString(),

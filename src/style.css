@@ -1,0 +1,10 @@
+#calendarSelect li {
+	display: inline-block;
+}
+#menubar li {
+	display: inline-block;
+}
+#authorize-div{
+	margin-left: 750px;	
+}
+

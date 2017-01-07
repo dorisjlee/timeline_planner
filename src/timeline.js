@@ -89,15 +89,16 @@ function addEvent(summary){
 	});
 }
 function renderTimeline(){
+	var container = document.getElementById('visualization');
 	event_data = new vis.DataSet(json_event_lst);
 	// Specify properties of groups (calendars)
 	// values indicate the ordering of the calendars in the visualization
 	// Content is the name of the visualization labelled on the tracks
-	var groups = new vis.DataSet([
-	    {id: 0, content: calendarNames[0], value: 1},
-	    {id: 1, content: calendarNames[1], value: 2},
-	    {id: 2, content: calendarNames[2], value: 3}
-	  ]);
+	var groupsData = []
+	for (var i = 0; i<calendarNames.length; i++){
+		groupsData.push({id:i,content:calendarNames[i],value:i+1})
+	}
+	var groups = new vis.DataSet(groupsData);
 	var timeline = new vis.Timeline(container, event_data, options);
 	timeline.setGroups(groups);
 	event_data.on('*', function (event, properties) {

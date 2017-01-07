@@ -1,7 +1,5 @@
 var calendarNameIds;
-var calendarNames = ['Long Term (Personal)','Long Term (Work)','Schedule'] //calendars to plot 
-// // For debugging 
-// var calendarNames = ['Long Term (Work)'] 
+var calendarNames=[];//calendars to plot
 function listCalendars()
 {
 	//Retreive calendarID used for retreiving events in the calendar and summary (name) of the calendar
@@ -27,4 +25,8 @@ function loadFromAllCalendars(calendarNames){
 			loadEventsFromCalendar(calendarNameIds[calendarNames[i]],calendarNames[i]);	
 		}		
 	}
+}
+function selectCalendar(btn)
+{
+	calendarNames.push(btn.id);
 }
