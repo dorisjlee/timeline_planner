@@ -22,7 +22,6 @@ var json_event_lst =[];//list of JSON event data
     request.execute(function(resp) {
       // var dfd = $.Deferred();
       var events = resp.items;
-      appendPre('Upcoming events:');
       var json_event;
       if (events.length > 0) {
         for (i = 0; i < events.length; i++) {
@@ -38,7 +37,6 @@ var json_event_lst =[];//list of JSON event data
             stime = new Date(event.start.date);
           }
           json_event.start =stime;
-          // appendPre(event.summary + ' (' + stime + ')')
 
           var etime = new Date(event.end.dateTime);
           if (isNaN(etime.valueOf())) {
@@ -47,33 +45,14 @@ var json_event_lst =[];//list of JSON event data
           }
           console.log(etime-stime);
           if ((etime-stime)/1000/3600/24!=1){
-            // if duration is one day, don't add a enddate, treat it as a day event 
-          // if (! isNaN(etime.valueOf())) { 
-            //if etime not null then write it as a JSON field, otherwise, don't add the end field
+            // otherwise, if duration is one day, don't add a enddate, treat it as a day event(no enddate)
             json_event.end =etime;  
           }
           json_event_lst.push(json_event)
-          // dfd.resolve();
-          // return dfd.promise()
         }
-      } else {
-        appendPre('No upcoming events found.');
       }
       if (renderVis){
         renderTimeline();
       } 
     });
-    // return request
-  }
-  
-  /**
-   * Append a pre element to the body containing the given message
-   * as its text node.
-   *
-   * @param {string} message Text to be placed in pre element.
-   */
-  function appendPre(message) {
-    var pre = document.getElementById('output');
-    var textContent = document.createTextNode(message + '\n');
-    pre.appendChild(textContent);
   }

@@ -85,7 +85,7 @@ function addEvent(summary){
 	});
 
 	request.execute(function(event) {
-	  appendPre('Event created: ' + event.htmlLink);
+	  console.log('Event created: ' + event.htmlLink);
 	});
 }
 function renderTimeline(){
