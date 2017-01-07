@@ -63,7 +63,10 @@ var options = {
 	      callback(null); // cancel deletion
 	    }
 	  });
-	}
+	},
+	groupOrder: function (a, b) {
+      return a.value - b.value;
+    }
 };
 function addEvent(summary){
 	var event = {
@@ -88,10 +91,21 @@ function addEvent(summary){
 function renderTimeline(){
 	//var items = listUpcomingEvents();
 	event_data = new vis.DataSet(json_event_lst);
+	// Specify properties of groups (calendars)
+	// values indicate the ordering of the calendars in the visualization
+	// Content is the name of the visualization labelled on the tracks
+	var groups = new vis.DataSet([
+	    {id: 0, content: calendarNames[0], value: 1},
+	    {id: 1, content: calendarNames[1], value: 2},
+	    {id: 2, content: calendarNames[2], value: 3}
+	  ]);
 	var timeline = new vis.Timeline(container, event_data, options);
+	timeline.setGroups(groups);
 	event_data.on('*', function (event, properties) {
 		logEvent(event, properties);
 	});
+	
+	
 }
 function logEvent(event, properties) {
 var log = document.getElementById('log');

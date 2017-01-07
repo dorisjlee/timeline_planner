@@ -4,21 +4,17 @@ var json_event_lst =[];//list of JSON event data
    * once client library is loaded.
    */
   function loadCalendarApi() {
-    gapi.client.load('calendar', 'v3', listUpcomingEvents);
+    gapi.client.load('calendar', 'v3', listCalendars);    
   }
 
-  function listUpcomingEvents() {
-    /**
-     * Print the summary and start datetime/date of the next ten events in
-     * the authorized user's calendar. If no events are found an
-     * appropriate message is printed.
-     */
+  function loadEventsFromCalendar(calendarId,calendarName) {
+    // Add events from calendar corresponding to the given calendarId into json_event_lst. 
     var request = gapi.client.calendar.events.list({
-      'calendarId': 'primary',
+      'calendarId': calendarId,
       'timeMin': startdate.toISOString(),
       'showDeleted': false,
       'singleEvents': true,
-      'maxResults': 100,
+      'maxResults': 50,
       'orderBy': 'startTime'
     });
 
@@ -30,9 +26,11 @@ var json_event_lst =[];//list of JSON event data
       if (events.length > 0) {
         for (i = 0; i < events.length; i++) {
           var json_event = {};
-          var event =events[i];
-          json_event.id=i+1;
-          json_event.content=event.summary;
+          var event = events[i];
+          json_event.id = json_event_lst.length+1;
+          json_event.content = event.summary;
+          json_event.group = calendarNames.indexOf(calendarName);
+          json_event.class = calendarName;
           var stime = new Date(event.start.dateTime);
           if (isNaN(stime.valueOf())) {
             //For all day events
@@ -53,16 +51,13 @@ var json_event_lst =[];//list of JSON event data
             json_event.end =etime;  
           }
           json_event_lst.push(json_event)
-          console.log(json_event)
         }
       } else {
         appendPre('No upcoming events found.');
       }
-      console.log(json_event_lst)
-      renderTimeline();
     });
   }
-
+  
   /**
    * Append a pre element to the body containing the given message
    * as its text node.
