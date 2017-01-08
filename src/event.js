@@ -57,18 +57,28 @@ function loadEventsFromCalendar(calendarId,calendarName,renderVis=false) {
   });
 }
 function addEvent(item){
-  //Adding all-day events 
+  //Adding events to calendar
+  // By default, this adds an all day event
+  // If "range:<event name>" is specified, then 5 day (with range) event is added.
+  // ex) range:Working on Paper
+  // Then the date range could be directly manipulated by onMove
   var end = new Date(item.start);
-  end.setDate(item.start.getDate()+1)
+  if (item.content.indexOf(':') == -1)
+  {
+    end.setDate(item.start.getDate()+1)
+  }else{
+    end.setDate(item.start.getDate()+5)
+    item.content = item.content.split(":")[1];
+  }
   var event = {
     'summary': item.content,
     'start': {
       'dateTime': item.start.toJSON(),
-      'timeZone': 'America/Los_Angeles'
+      'timeZone': 'America/Chicago'
     },
     'end': {
       'dateTime': end.toJSON(),
-      'timeZone': 'America/Los_Angeles'
+      'timeZone': 'America/Chicago'
     }
   };
   var request = gapi.client.calendar.events.insert({
@@ -92,4 +102,34 @@ function deleteEvent(item){
   request.execute(function(event) {
     console.log('Event deleted: ' + event.htmlLink);
   });
+}
+
+function changeDate(item){
+  //Changing the start or end date for all-day events 
+  // date for all day events 
+  // dateTime for event 
+  
+  var event = {
+    'summary': item.content,
+    'start': {
+      'dateTime': item.start.toJSON(),
+      'timeZone': 'America/Chicago'
+    },
+    'end': {
+      'dateTime': item.end.toJSON(),
+      'timeZone': 'America/Chicago'
+    }
+  };
+  var request = gapi.client.calendar.events.update({
+                  'calendarId': calendarNameIds[calendarNames[item.group]],
+                  'eventId': item.eventID,
+                  'resource': event
+                });
+  request.execute(function(event) {
+    console.log('Event modified: ' + event.htmlLink);
+    item.id = event.id;
+  });
+  //Add in event ID
+  json_event_lst.pop(item);
+  json_event_lst.push(item);
 }

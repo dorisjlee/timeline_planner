@@ -11,8 +11,8 @@ var options = {
 	  prettyPrompt('Add item', 'Enter text content for new item:', item.content, function (value) {
 	    if (value) {
 	      item.content = value;
-	      callback(item); // send back adjusted new item
 	      addEvent(item); //update on GCal
+	      callback(item); // send back adjusted new item
 	    }
 	    else {
 	      callback(null); // cancel item creation
@@ -21,6 +21,7 @@ var options = {
 	},
 
 	onMove: function (item, callback) {
+	  //Dragging to move event to another date
 	  var title = 'Do you really want to move the item to\n' +
 	      'start: ' + item.start + '\n' +
 	      'end: ' + item.end + '?';
@@ -28,6 +29,7 @@ var options = {
 	  prettyConfirm('Move item', title, function (ok) {
 	    if (ok) {
 	      callback(item); // send back item as confirmation (can be changed)
+	      changeDate(item)
 	    }
 	    else {
 	      callback(null); // cancel editing item
@@ -36,6 +38,7 @@ var options = {
 	},
 
 	onMoving: function (item, callback) {
+	  //Dragging to extend or shrink event range
 	  if (item.start < startdate) item.start = startdate;
 	  if (item.start > enddate) item.start = enddate;
 	  if (item.end   > enddate) item.end   = enddate;
@@ -97,21 +100,21 @@ log.firstChild ? log.insertBefore(msg, log.firstChild) : log.appendChild(msg);
 }
 
 function prettyConfirm(title, text, callback) {
-swal({
-  title: title,
-  text: text,
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55"
-}, callback);
+	swal({
+	  title: title,
+	  text: text,
+	  type: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: "#DD6B55"
+	}, callback);
 }
 
 function prettyPrompt(title, text, inputValue, callback) {
-swal({
-  title: title,
-  text: text,
-  type: 'input',
-  showCancelButton: true,
-  inputValue: inputValue
-}, callback);
+	swal({
+	  title: title,
+	  text: text,
+	  type: 'input',
+	  showCancelButton: true,
+	  inputValue: inputValue
+	}, callback);
 }
