@@ -59,6 +59,7 @@ var options = {
 	  prettyConfirm('Remove item', 'Do you really want to remove item ' + item.content + '?', function (ok) {
 	    if (ok) {
 	      callback(item); // confirm deletion
+	      deleteEvent(item);
 	    }
 	    else {
 	      callback(null); // cancel deletion
@@ -69,30 +70,7 @@ var options = {
       return a.value - b.value;
     }
 };
-function addEvent(item){
-	//Adding all-day events 
-	var end = new Date(item.start);
-	end.setDate(item.start.getDate()+1)
-	var event = {
-	  'summary': item.content,
-	  'start': {
-	    'dateTime': item.start.toJSON(),
-    	'timeZone': 'America/Los_Angeles'
-	  },
-	  'end': {
-	    'dateTime': end.toJSON(),
-	    'timeZone': 'America/Los_Angeles'
-	  }
-	};
-	var request = gapi.client.calendar.events.insert({
-	  'calendarId': calendarNameIds[calendarNames[item.group]],
-	  'resource': event
-	});
 
-	request.execute(function(event) {
-	  console.log('Event created: ' + event.htmlLink);
-	});
-}
 function renderTimeline(){
 	var container = document.getElementById('visualization');
 	event_data = new vis.DataSet(json_event_lst);
