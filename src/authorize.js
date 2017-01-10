@@ -55,7 +55,10 @@ function handleAuthResult(authResult) {
   var authorizeDiv = document.getElementById('authorize-div');
   if (authResult && !authResult.error) {
     // Hide auth UI, then load client library.
-    authorizeDiv.style.display = 'none';
+    // authorizeDiv.style.display = 'none';
+    authorizeDiv.style.display = 'inline'; //Don't hide, change to submit button instead
+    var authorizeBtn = document.getElementById('authorize-button');
+    authorizeBtn.textContent  = "Submit";
     loadCalendarApi();
   } else {
     // Show auth UI, allowing the user to initiate authorization by

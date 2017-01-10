@@ -29,7 +29,7 @@ var options = {
 	  prettyConfirm('Move item', title, function (ok) {
 	    if (ok) {
 	      callback(item); // send back item as confirmation (can be changed)
-	      changeDate(item)
+	      changeDate(item);
 	    }
 	    else {
 	      callback(null); // cancel editing item
@@ -42,7 +42,7 @@ var options = {
 	  if (item.start < startdate) item.start = startdate;
 	  if (item.start > enddate) item.start = enddate;
 	  if (item.end   > enddate) item.end   = enddate;
-
+	  changeDate(item);
 	  callback(item); // send back the (possibly) changed item
 	},
 
@@ -76,6 +76,7 @@ var options = {
 
 function renderTimeline(){
 	var container = document.getElementById('visualization');
+	$('#visualization').empty();//clears canvas
 	event_data = new vis.DataSet(json_event_lst);
 	// Specify properties of groups (calendars)
 	// values indicate the ordering of the calendars in the visualization

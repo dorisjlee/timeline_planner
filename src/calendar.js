@@ -16,6 +16,11 @@ function listCalendars()
 }
 
 function loadFromAllCalendars(calendarNames){
+	//Remove duplicates in calendarNames, so that no duplicate tracks shown when re-render submit
+	calendarNames = calendarNames.filter(function(item, pos) {
+    return calendarNames.indexOf(item) == pos;
+	})
+
 	//Load events from all selected calendars
 	for (var i =0; i<calendarNames.length;i++){
 		if (i==calendarNames.length-1){
