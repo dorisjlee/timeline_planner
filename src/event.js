@@ -69,6 +69,7 @@ function addEvent(item){
   }else{
     end.setDate(item.start.getDate()+5)
     item.content = item.content.split(":")[1];
+    item.end = end;
   }
   var event = {
     'summary': item.content,
