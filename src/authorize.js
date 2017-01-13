@@ -53,6 +53,17 @@ function checkAuth() {
  */
 function handleAuthResult(authResult) {
   var authorizeDiv = document.getElementById('authorize-div');
+  // Reset all variable to clear viz when redrawing 
+  calendarNames =[];
+  json_event_lst =[]
+  //Check list of calendars checked and add it into calendarNames list
+  var selections = document.getElementById("calendarSelect").children
+  for (var i=0 ; i<selections.length;i++){
+    var inputObj = selections[i].children[0]
+    if  (inputObj.checked){
+      calendarNames.push(inputObj.id)
+    }
+  }
   if (authResult && !authResult.error) {
     // Hide auth UI, then load client library.
     // authorizeDiv.style.display = 'none';

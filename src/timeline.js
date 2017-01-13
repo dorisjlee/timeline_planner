@@ -91,8 +91,6 @@ function renderTimeline(){
 	event_data.on('*', function (event, properties) {
 		logEvent(event, properties);
 	});
-	// calendarNames=[];
-	// json_event_lst=[];
 }
 function logEvent(event, properties) {
 var log = document.getElementById('log');

@@ -23,7 +23,7 @@
     background-color: #9A9CFF;
 }
 .vis-item.personal-planning {    
-	border-color: #BDB634;
+	border-color: #f8df86;
     color: #1d1d1d;
     background-color: #FBE983;
 }
@@ -32,7 +32,7 @@
     color: #1d1d1d;
     background-color: #FFAD46;
 }
-.vis-item.events  {
+.vis-item.event-schedule  {
 	border-color: #4DB810; 
 	color:#1d1d1d;
 	background-color:#80d24f;
