@@ -9,14 +9,13 @@
       font-size: 11pt;
     }
   </style>
-
-  <script src="../resources/sweetalert.min.js"></script>
-  <link href="../resources/sweetalert.css" rel="stylesheet" type="text/css"/>
-
-  <script src="../resources/vis.min.js"></script>
-  <link href="../resources/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
   <script src="../resources/jquery.min.js"></script>
   <script src="../resources/jquery-ui.js"></script>
+  <script src="../resources/sweetalert.min.js"></script>
+  <link href="../resources/sweetalert.css" rel="stylesheet" type="text/css"/>
+  <script src="../resources/bigSlide.js"></script>
+  <script src="../resources/vis.min.js"></script>
+  <link href="../resources/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
   <script src="../resources/client.js"></script>
   <script src="authorize.js"></script>
   <script src="event.js"></script>
@@ -41,13 +40,22 @@
     <div id="authorize-div" >
       <button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>
     </div>
+    <li><a href="#menu" class="menu-link">&#9776;</a></li>
   </li>
 </ul>
 
 <div id="visualization"></div>
 <p></p>
-<div id="log"></div>
-<pre id="output"></pre>
 
+<div id="menu" class="panel">
+  Content for side panel here (Notes, goals, memos, reminders..etc)
+</div>
+
+<script >
+  $(document).ready(function() {
+      $('.menu-link').bigSlide();
+  });
+$("#menu").load("../data/panel-content.html")
+</script>
 </body>
 </html>

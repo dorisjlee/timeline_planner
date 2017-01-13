@@ -88,9 +88,9 @@ function renderTimeline(){
 	var groups = new vis.DataSet(groupsData);
 	var timeline = new vis.Timeline(container, event_data, options);
 	timeline.setGroups(groups);
-	event_data.on('*', function (event, properties) {
-		logEvent(event, properties);
-	});
+	// event_data.on('*', function (event, properties) {
+	// 	logEvent(event, properties);
+	// });
 }
 function logEvent(event, properties) {
 var log = document.getElementById('log');

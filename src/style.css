@@ -1,3 +1,4 @@
+
 #calendarSelect li {
 	display: inline-block;
 }
@@ -36,4 +37,27 @@
 	border-color: #4DB810; 
 	color:#1d1d1d;
 	background-color:#80d24f;
+}
+
+.panel {
+  /*left: -20em !important;*/
+  background: #ccc;
+  margin-right: 320px;
+  margin-left: -25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 20px;
+  width: 260px;
+  float: left;
+  z-index: 99999; }
+#outer{
+  margin-left: -10px;
+}
+.panel h2{
+  margin-left: 15px;
+}
+
+#midinner{
+  margin-left: -25px;
 }

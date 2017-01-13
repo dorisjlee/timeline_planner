@@ -1,2 +1,3 @@
 vis-4.17.0/
-client_id.json
+data/client_id.json
+data/panel-content.html
