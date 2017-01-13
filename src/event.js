@@ -30,7 +30,7 @@ function loadEventsFromCalendar(calendarId,calendarName,renderVis=false) {
         json_event.id = json_event_lst.length+1;
         json_event.content = event.summary;
         json_event.group = calendarNames.indexOf(calendarName);
-        json_event.class = calendarName;
+        json_event.className = calendarName.toLowerCase().replace(" ","-");
         json_event.eventID= event.id;
         var stime = new Date(event.start.dateTime);
         if (isNaN(stime.valueOf())) {
@@ -109,7 +109,11 @@ function changeDate(item){
   //Changing the start or end date for all-day events 
   // date for all day events 
   // dateTime for event 
-  
+  var end = new Date(item.start);
+  if (! item.end ) //if end date is undefined then set as all day event
+  {
+    end.setDate(item.start.getDate()+1)
+  }
   var event = {
     'summary': item.content,
     'start': {
@@ -117,7 +121,7 @@ function changeDate(item){
       'timeZone': 'America/Chicago'
     },
     'end': {
-      'dateTime': item.end.toJSON(),
+      'dateTime': end.toJSON(),
       'timeZone': 'America/Chicago'
     }
   };

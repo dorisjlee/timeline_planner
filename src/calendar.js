@@ -2,6 +2,10 @@ var calendarNameIds;
 var calendarNames=[];//calendars to plot
 function listCalendars()
 {
+	// //Remove duplicates in calendarNames, so that no duplicate tracks shown when re-render submit
+	// calendarNames = calendarNames.filter(function(item, pos) {
+ //    	return calendarNames.indexOf(item) == pos;
+	// })
 	//Retreive calendarID used for retreiving events in the calendar and summary (name) of the calendar
      var request = gapi.client.calendar.calendarList.list();
      calendarNameIds={}
@@ -16,11 +20,6 @@ function listCalendars()
 }
 
 function loadFromAllCalendars(calendarNames){
-	//Remove duplicates in calendarNames, so that no duplicate tracks shown when re-render submit
-	calendarNames = calendarNames.filter(function(item, pos) {
-    return calendarNames.indexOf(item) == pos;
-	})
-
 	//Load events from all selected calendars
 	for (var i =0; i<calendarNames.length;i++){
 		if (i==calendarNames.length-1){

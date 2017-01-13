@@ -8,3 +8,32 @@
 	margin-left: 300px;	
 }
 
+/*Color Calendar based on calendar classname */
+.vis-item{
+	border-width: 1px;
+}
+.vis-item.work-planning  { 
+	border-color: #1587BD;
+    color: #1d1d1d;
+    background-color: #9FC6E7;
+}
+.vis-item.work-milestones     { 
+    border-color: #373AD7;
+    color: #1d1d1d;
+    background-color: #9A9CFF;
+}
+.vis-item.personal-planning {    
+	border-color: #BDB634;
+    color: #1d1d1d;
+    background-color: #FBE983;
+}
+.vis-item.personal-milestones {
+    border-color: #CB7403;
+    color: #1d1d1d;
+    background-color: #FFAD46;
+}
+.vis-item.events  {
+	border-color: #4DB810; 
+	color:#1d1d1d;
+	background-color:#80d24f;
+}
