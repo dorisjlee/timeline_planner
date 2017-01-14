@@ -11,9 +11,3 @@ function move (percentage) {
         end:   range.end.valueOf()   - interval * percentage
     });
 }
-
-// attach events to the navigation buttons
-$('#zoomIn').onclick    = function () { timeline.zoomIn( 0.2); };
-$('#zoomOut').onclick   = function () { timeline.zoomOut( 0.2); };
-$('#moveLeft').onclick  = function () { move( 0.2); };
-$('#moveRight').onclick = function () { move(-0.2); };

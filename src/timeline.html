@@ -41,15 +41,18 @@
     <div id="authorize-div" >
       <button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>
     </div>
-    <li><a href="#menu" class="menu-link">&#9776;</a></li>
   </li>
+  <li><a href="#menu" class="menu-link">&#9776;</a></li>  
 </ul>
 <br><br>
 <div class="menu">
-  <input type="button" id="zoomIn" value="Zoom in"  />
-  <input type="button" id="zoomOut" value="Zoom out"/>
-  <input type="button" id="moveLeft" value="Move left"/>
-  <input type="button" id="moveRight" value="Move right"/>
+  <input type="button" id="zoomIn" class="navButton" value="+"  />
+  <input type="button" id="zoomOut" class="navButton" value="-"/>
+  <input type="button" id="moveLeft" class="navButton" value="&larr;"/>
+  <input type="button" id="moveRight" class="navButton" value="&rarr;"/>
+  <input type="button" id="todayView" class="viewButton" value="Today"/>
+  <input type="button" id="weekView" class="viewButton" value="This Week"/>
+  <input type="button" id="monthView"  class="viewButton" value="This Month"/>
 </div>
 <div id="visualization"></div>
 <p></p>
@@ -64,15 +67,25 @@
   });
 $("#menu").load("../data/panel-content.html")
 
+var today = new Date();
+
 // attach events to the navigation buttons
-// $('#zoomIn').onclick    = function () { timeline.zoomIn( 0.2); };
-// $('#zoomOut').onclick   = function () { timeline.zoomOut( 0.2); };
-// $('#moveLeft').onclick  = function () { move( 0.2); };
-// $('#moveRight').onclick = function () { move(-0.2); };
 document.getElementById('zoomIn').onclick    = function () { timeline.zoomIn( 0.2); };
 document.getElementById('zoomOut').onclick   = function () { timeline.zoomOut( 0.2); };
 document.getElementById('moveLeft').onclick  = function () { move( 0.2); };
 document.getElementById('moveRight').onclick = function () { move(-0.2); };
+document.getElementById('todayView').onclick = function () { 
+                                                var end = new Date();
+                                                end.setDate(today.getDate()+1);
+                                                timeline.setWindow(today,end);};
+document.getElementById('weekView').onclick = function () { 
+                                                var end = new Date();
+                                                end.setDate(today.getDate()+7);
+                                                timeline.setWindow(today,end);};
+document.getElementById('monthView').onclick = function () { 
+                                                var end = new Date();
+                                                end.setMonth(today.getMonth()+1);
+                                                timeline.setWindow(today,end);};
 </script>
 </body>
 </html>

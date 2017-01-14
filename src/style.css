@@ -8,7 +8,6 @@
 #authorize-div{
 	margin-left: 300px;	
 }
-
 /*Color Calendar based on calendar classname */
 .vis-item{
 	border-width: 1px;
@@ -73,3 +72,24 @@
     margin: 10px;
     z-index: 9999;
 }
+
+.navButton{
+  background-color: rgba(141, 81, 207, 0.34);
+  border-color: rgba(56, 83, 128, 0.25);
+  border-style: solid;
+  border-radius: 5px;
+  border-width: thin;
+}
+.viewButton{
+  background-color: rgba(0, 161, 255, 0.21);
+  border-color: rgba(0, 96, 179, 0.31);
+  border-style: solid;
+  border-radius: 5px;
+  border-width: thin;
+}
+#authorize-button{
+  background-color: #c8c8c8;
+  border-color: #aaa;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: thin;
