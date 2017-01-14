@@ -14,7 +14,7 @@ function loadEventsFromCalendar(calendarId,calendarName,renderVis=false) {
     'timeMin': startdate.toISOString(),
     'showDeleted': false,
     'singleEvents': true,
-    'maxResults': 50,
+    'maxResults': 300,
     'orderBy': 'startTime'
   });
 

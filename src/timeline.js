@@ -1,7 +1,7 @@
-var startdate = new Date();//Start from Now - 2 months
-startdate.setMonth(startdate.getMonth() - 2);
+var startdate = new Date();//Start from Now - 1 months
+startdate.setMonth(startdate.getMonth() - 1);
 var enddate = new Date()//End from Now + 2 Year
-enddate.setMonth(enddate.getYear() + 2);
+enddate.setFullYear(enddate.getFullYear()+2)
 var event_data;
 
 var options = {
