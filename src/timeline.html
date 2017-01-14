@@ -21,6 +21,7 @@
   <script src="event.js"></script>
   <script src="timeline.js"></script>
   <script src="calendar.js"></script>
+  <script src="navigation.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -43,7 +44,13 @@
     <li><a href="#menu" class="menu-link">&#9776;</a></li>
   </li>
 </ul>
-
+<br><br>
+<div class="menu">
+  <input type="button" id="zoomIn" value="Zoom in"  />
+  <input type="button" id="zoomOut" value="Zoom out"/>
+  <input type="button" id="moveLeft" value="Move left"/>
+  <input type="button" id="moveRight" value="Move right"/>
+</div>
 <div id="visualization"></div>
 <p></p>
 
@@ -56,6 +63,16 @@
       $('.menu-link').bigSlide();
   });
 $("#menu").load("../data/panel-content.html")
+
+// attach events to the navigation buttons
+// $('#zoomIn').onclick    = function () { timeline.zoomIn( 0.2); };
+// $('#zoomOut').onclick   = function () { timeline.zoomOut( 0.2); };
+// $('#moveLeft').onclick  = function () { move( 0.2); };
+// $('#moveRight').onclick = function () { move(-0.2); };
+document.getElementById('zoomIn').onclick    = function () { timeline.zoomIn( 0.2); };
+document.getElementById('zoomOut').onclick   = function () { timeline.zoomOut( 0.2); };
+document.getElementById('moveLeft').onclick  = function () { move( 0.2); };
+document.getElementById('moveRight').onclick = function () { move(-0.2); };
 </script>
 </body>
 </html>

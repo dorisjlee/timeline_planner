@@ -61,3 +61,15 @@
 #midinner{
   margin-left: -25px;
 }
+
+#visualization {
+    position: relative;
+}
+
+.menu {
+    position: absolute;
+    top: 40px;
+    right: 53px;
+    margin: 10px;
+    z-index: 9999;
+}

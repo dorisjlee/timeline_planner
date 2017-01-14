@@ -1,3 +1,4 @@
+var timeline;
 var startdate = new Date();//Start from Now - 1 months
 startdate.setMonth(startdate.getMonth() - 1);
 var enddate = new Date()//End from Now + 2 Year
@@ -86,7 +87,7 @@ function renderTimeline(){
 		groupsData.push({id:i,content:calendarNames[i],value:i+1})
 	}
 	var groups = new vis.DataSet(groupsData);
-	var timeline = new vis.Timeline(container, event_data, options);
+	timeline = new vis.Timeline(container, event_data, options);
 	timeline.setGroups(groups);
 	// event_data.on('*', function (event, properties) {
 	// 	logEvent(event, properties);
