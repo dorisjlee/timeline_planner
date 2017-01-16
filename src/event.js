@@ -1,4 +1,18 @@
 var json_event_lst =[];//list of JSON event data 
+
+//Overrides the Date.toJSON function so that the .toLocaleString() time is printed in JSON rather than the UTC converted time
+Date.prototype.toJSON = function () {
+  var timezoneOffsetInHours = -(this.getTimezoneOffset() / 60); //UTC minus local time
+  var sign = timezoneOffsetInHours >= 0 ? '+' : '-';
+  var leadingZero = (timezoneOffsetInHours < 10) ? '0' : '';
+  var correctedDate = new Date(this.getFullYear(), this.getMonth(), 
+      this.getDate(), this.getHours(), this.getMinutes(), this.getSeconds(), 
+      this.getMilliseconds());
+  correctedDate.setHours(this.getHours() + timezoneOffsetInHours);
+  var iso = correctedDate.toISOString().replace('Z', '');
+  var correctedDateString = iso + sign + leadingZero + Math.abs(timezoneOffsetInHours).toString() + ':00';
+  return correctedDateString.split('+')[0];
+}
 /**
  * Load Google Calendar client library. List upcoming events
  * once client library is loaded.
@@ -39,12 +53,10 @@ function loadEventsFromCalendar(calendarId,calendarName,renderVis=false) {
         }
         json_event.start =stime;
 
+        // For all day events, end.dateTime = null since we only have end.date and start.date
         var etime = new Date(event.end.dateTime);
-        if (isNaN(etime.valueOf())) {
-          //For all day events
+        if (! isNaN(etime.valueOf())) {
           etime = new Date(event.end.date);
-        }
-        if ((etime-stime)/1000/3600/24!=1){
           // otherwise, if duration is one day, don't add a enddate, treat it as a day event(no enddate)
           json_event.end =etime;  
         }
@@ -83,7 +95,7 @@ function addEvent(item,callback){
 
   }else{
     var end = new Date(item.start);
-    end.setDate(item.start.getDate()+5);
+    end.setDate(item.start.getDate()+2);
     item.content = item.content.split(":")[1];
     item.end = end;
     var event = {
@@ -167,5 +179,6 @@ function changeDate(item){
     json_event_lst.push(item);
     // callback(item);
   });
-  
-}
+  }
+
+
