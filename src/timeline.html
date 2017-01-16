@@ -67,13 +67,13 @@
   });
 $("#menu").load("../data/panel-content.html")
 
-var today = new Date();
 
 // attach events to the navigation buttons
 document.getElementById('zoomIn').onclick    = function () { timeline.zoomIn( 0.2); };
 document.getElementById('zoomOut').onclick   = function () { timeline.zoomOut( 0.2); };
 document.getElementById('moveLeft').onclick  = function () { move( 0.2); };
 document.getElementById('moveRight').onclick = function () { move(-0.2); };
+var today = new Date();
 document.getElementById('todayView').onclick = function () { 
                                                 var end = new Date();
                                                 end.setDate(today.getDate()+1);

@@ -62,26 +62,41 @@ function addEvent(item){
   // If "range:<event name>" is specified, then 5 day (with range) event is added.
   // ex) range:Working on Paper
   // Then the date range could be directly manipulated by onMove
-  var end = new Date(item.start);
+  
+  
   if (item.content.indexOf(':') == -1)
   {
-    end.setDate(item.start.getDate()+1)
+    // var prev = new Date(item.start);
+    // prev.setDate(item.start.getDate()-1)
+    var date  = item.start.getFullYear()+'-'+("0" + (item.start.getMonth() + 1)).slice(-2)+'-'+item.start.getDate();
+    var event = {
+      'summary': item.content,
+      'start': {
+        'date': date,
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'date': date,
+        'timeZone': 'America/Chicago'
+      }
+    };
+
   }else{
     end.setDate(item.start.getDate()+5)
     item.content = item.content.split(":")[1];
     item.end = end;
-  }
-  var event = {
+    var event = {
     'summary': item.content,
     'start': {
       'dateTime': item.start.toJSON(),
       'timeZone': 'America/Chicago'
     },
     'end': {
-      'dateTime': end.toJSON(),
-      'timeZone': 'America/Chicago'
-    }
-  };
+        'dateTime': end.toJSON(),
+        'timeZone': 'America/Chicago'
+      }
+    };
+  }
   var request = gapi.client.calendar.events.insert({
     'calendarId': calendarNameIds[calendarNames[item.group]],
     'resource': event
@@ -91,7 +106,6 @@ function addEvent(item){
     item.id = event.id;
   });
   //Add in event ID
-  json_event_lst.pop(item);
   json_event_lst.push(item);
 }
 
