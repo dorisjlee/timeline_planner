@@ -129,19 +129,32 @@ function changeDate(item){
   var end = new Date(item.start);
   if (! item.end ) //if end date is undefined then set as all day event
   {
-    end.setDate(item.start.getDate()+1)
+    var date  = item.start.getFullYear()+'-'+("0" + (item.start.getMonth() + 1)).slice(-2)+'-'+item.start.getDate();
+    var event = {
+      'summary': item.content,
+      'start': {
+        'date': date,
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'date': date,
+        'timeZone': 'America/Chicago'
+      }
+    };
+  }else{
+    var event = {
+      'summary': item.content,
+      'start': {
+        'dateTime': item.start.toJSON(),
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'dateTime': item.end.toJSON(),
+        'timeZone': 'America/Chicago'
+      }
+    };
   }
-  var event = {
-    'summary': item.content,
-    'start': {
-      'dateTime': item.start.toJSON(),
-      'timeZone': 'America/Chicago'
-    },
-    'end': {
-      'dateTime': end.toJSON(),
-      'timeZone': 'America/Chicago'
-    }
-  };
+  
   var request = gapi.client.calendar.events.update({
                   'calendarId': calendarNameIds[calendarNames[item.group]],
                   'eventId': item.eventID,
@@ -149,9 +162,10 @@ function changeDate(item){
                 });
   request.execute(function(event) {
     console.log('Event modified: ' + event.htmlLink);
-    item.id = event.id;
+    //Add in event ID
+    item.eventID = event.id;
+    json_event_lst.push(item);
+    // callback(item);
   });
-  //Add in event ID
-  json_event_lst.pop(item);
-  json_event_lst.push(item);
+  
 }

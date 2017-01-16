@@ -29,7 +29,6 @@ var options = {
 
 	  prettyConfirm('Move item', title, function (ok) {
 	    if (ok) {
-	      callback(item); // send back item as confirmation (can be changed)
 	      changeDate(item);
 	    }
 	    else {
