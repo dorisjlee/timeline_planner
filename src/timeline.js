@@ -12,8 +12,8 @@ var options = {
 	  prettyPrompt('Add item', 'Enter text content for new item:', item.content, function (value) {
 	    if (value) {
 	      item.content = value;
-	      addEvent(item); //update on GCal
-	      callback(item); // send back adjusted new item
+	      addEvent(item,callback); //update on GCal
+	      
 	    }
 	    else {
 	      callback(null); // cancel item creation

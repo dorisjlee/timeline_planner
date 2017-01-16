@@ -56,7 +56,7 @@ function loadEventsFromCalendar(calendarId,calendarName,renderVis=false) {
     } 
   });
 }
-function addEvent(item){
+function addEvent(item,callback){
   //Adding events to calendar
   // By default, this adds an all day event
   // If "range:<event name>" is specified, then 5 day (with range) event is added.
@@ -82,7 +82,8 @@ function addEvent(item){
     };
 
   }else{
-    end.setDate(item.start.getDate()+5)
+    var end = new Date(item.start);
+    end.setDate(item.start.getDate()+5);
     item.content = item.content.split(":")[1];
     item.end = end;
     var event = {
@@ -103,10 +104,12 @@ function addEvent(item){
   });
   request.execute(function(event) {
     console.log('Event created: ' + event.htmlLink);
-    item.id = event.id;
+    item.eventID = event.id;
+    //Add in event ID
+    json_event_lst.push(item);
+    callback(item);// send back adjusted new item
   });
-  //Add in event ID
-  json_event_lst.push(item);
+  
 }
 
 function deleteEvent(item){
