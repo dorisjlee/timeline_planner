@@ -55,11 +55,14 @@ function loadEventsFromCalendar(calendarId,calendarName,renderVis=false) {
 
         // For all day events, end.dateTime = null since we only have end.date and start.date
         var etime = new Date(event.end.dateTime);
-        if (! isNaN(etime.valueOf())) {
+        if (isNaN(etime.valueOf())) {
           etime = new Date(event.end.date);
+        }
+        if ((etime-stime)/1000/3600/24!=1){
           // otherwise, if duration is one day, don't add a enddate, treat it as a day event(no enddate)
           json_event.end =etime;  
         }
+
         json_event_lst.push(json_event)
       }
     }
