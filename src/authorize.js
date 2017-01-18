@@ -2,6 +2,7 @@
 // (retrieved from your project in the Google
 // Developer Console, https://console.developers.google.com)
 
+
 var CLIENT_ID;
 
 var getJSON = function(url, successHandler, errorHandler) {
@@ -56,14 +57,16 @@ function handleAuthResult(authResult) {
   // Reset all variable to clear viz when redrawing 
   calendarNames =[];
   json_event_lst =[]
+  var allbtn = document.getElementById("All"); //If the "All" button is pressed, then all calendars should be displayed
   //Check list of calendars checked and add it into calendarNames list
   var selections = document.getElementById("calendarSelect").children
   for (var i=0 ; i<selections.length;i++){
     var inputObj = selections[i].children[0]
-    if  (inputObj.checked){
+    if  (inputObj.checked || allbtn.checked){
       calendarNames.push(inputObj.id)
     }
   }
+  calendarNames.remove("All")
   if (authResult && !authResult.error) {
     // Hide auth UI, then load client library.
     // authorizeDiv.style.display = 'none';
@@ -98,3 +101,15 @@ function autoAuth() {
     handleAuthResult);
   return false;
 }
+
+// Remove by value in a list, all matching values would be removed
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
