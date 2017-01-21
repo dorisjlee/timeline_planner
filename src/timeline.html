@@ -72,21 +72,27 @@ $("#menu").load("../data/panel-content.html")
 // attach events to the navigation buttons
 document.getElementById('zoomIn').onclick    = function () { timeline.zoomIn( 0.2); };
 document.getElementById('zoomOut').onclick   = function () { timeline.zoomOut( 0.2); };
-document.getElementById('moveLeft').onclick  = function () { move( 0.2); };
-document.getElementById('moveRight').onclick = function () { move(-0.2); };
+document.getElementById('moveLeft').onclick  = function () { move( 1); };
+document.getElementById('moveRight').onclick = function () { move(-1); };
+
 var today = new Date();
+// today.setHours(0,0,0,0);
 document.getElementById('todayView').onclick = function () { 
                                                 var end = new Date();
                                                 end.setDate(today.getDate()+1);
-                                                timeline.setWindow(today,end);};
+                                                end.setHours(0,0,0,0);
+                                                // end.setDate(dateToJSON(new Date(today.getDate()+1)));
+                                                timeline.setWindow(today,dateToJSON(end));};
 document.getElementById('weekView').onclick = function () { 
                                                 var end = new Date();
                                                 end.setDate(today.getDate()+7);
-                                                timeline.setWindow(today,end);};
+                                                end.setHours(0,0,0,0);
+                                                timeline.setWindow(dateToJSON(today),dateToJSON(end));};
 document.getElementById('monthView').onclick = function () { 
                                                 var end = new Date();
                                                 end.setMonth(today.getMonth()+1);
-                                                timeline.setWindow(today,end);};
+                                                end.setHours(0,0,0,0);
+                                                timeline.setWindow(dateToJSON(today),dateToJSON(end));};
 </script>
 </body>
 </html>
