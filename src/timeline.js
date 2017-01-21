@@ -9,11 +9,13 @@ var options = {
 	editable: true,
 
 	onAdd: function (item, callback) {
-	  prettyPrompt('Add item', 'Enter text content for new item:', item.content, function (value) {
+	  
+	  prettyPrompt('Add item',  
+		  	'Enter text content for new item occuring on:\n'+item.start.toLocaleString()
+		  	, item.content, function (value) {
 	    if (value) {
 	      item.content = value;
 	      addEvent(item,callback); //update on GCal
-	      
 	    }
 	    else {
 	      callback(null); // cancel item creation

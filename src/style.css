@@ -6,7 +6,8 @@
 	display: inline-block;
 }
 #authorize-div{
-	margin-left: 300px;	
+	/*margin-left: 300px;	*/
+  margin-left: 10px; 
 }
 /*Color Calendar based on calendar classname */
 .vis-item{

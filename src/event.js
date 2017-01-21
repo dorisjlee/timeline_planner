@@ -1,17 +1,22 @@
 var json_event_lst =[];//list of JSON event data 
 
-//Overrides the Date.toJSON function so that the .toLocaleString() time is printed in JSON rather than the UTC converted time
-Date.prototype.toJSON = function () {
-  var timezoneOffsetInHours = -(this.getTimezoneOffset() / 60); //UTC minus local time
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+//Overrides the Date.toJSON function so that 
+// Date.prototype.toJSON = function () {
+function dateToJSON(date){
+  // Feed in a Date object print the .toLocaleString() time is printed in JSON rather than the UTC converted time
+  var timezoneOffsetInHours = -(date.getTimezoneOffset() / 60); //UTC minus local time
   var sign = timezoneOffsetInHours >= 0 ? '+' : '-';
   var leadingZero = (timezoneOffsetInHours < 10) ? '0' : '';
-  var correctedDate = new Date(this.getFullYear(), this.getMonth(), 
-      this.getDate(), this.getHours(), this.getMinutes(), this.getSeconds(), 
-      this.getMilliseconds());
-  correctedDate.setHours(this.getHours() + timezoneOffsetInHours);
-  var iso = correctedDate.toISOString().replace('Z', '');
-  var correctedDateString = iso + sign + leadingZero + Math.abs(timezoneOffsetInHours).toString() + ':00';
-  return correctedDateString.split('+')[0];
+  var correctedDate = new Date(date.getFullYear(), date.getMonth(), 
+      date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), 
+      date.getMilliseconds());
+  correctedDate.setHours(0);
+  return correctedDate
 }
 /**
  * Load Google Calendar client library. List upcoming events
@@ -49,16 +54,20 @@ function loadEventsFromCalendar(calendarId,calendarName,renderVis=false) {
         var stime = new Date(event.start.dateTime);
         if (isNaN(stime.valueOf())) {
           //For all day events
-          stime = new Date(event.start.date);
+          // stime = new Date(event.start.date);
+          stime =dateToJSON(new Date(event.start.date));
         }
         json_event.start =stime;
 
         // For all day events, end.dateTime = null since we only have end.date and start.date
         var etime = new Date(event.end.dateTime);
         if (isNaN(etime.valueOf())) {
-          etime = new Date(event.end.date);
-        }
-        if ((etime-stime)/1000/3600/24!=1){
+          // etime = new Date(event.end.date);
+          // etime = event.end.date;
+          etime =dateToJSON(new Date(event.end.date));
+        }         
+        if (etime.getTime() != stime.getTime()){
+        // if ((etime-stime)/1000/3600/24!=1){
           // otherwise, if duration is one day, don't add a enddate, treat it as a day event(no enddate)
           json_event.end =etime;  
         }
@@ -83,7 +92,7 @@ function addEvent(item,callback){
   {
     // var prev = new Date(item.start);
     // prev.setDate(item.start.getDate()-1)
-    var date  = item.start.getFullYear()+'-'+("0" + (item.start.getMonth() + 1)).slice(-2)+'-'+item.start.getDate();
+    var date  = item.start.getFullYear()+'-'+pad(item.start.getMonth()+1,2)+'-'+pad(item.start.getDate(),2);
     var event = {
       'summary': item.content,
       'start': {
