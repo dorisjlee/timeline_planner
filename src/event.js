@@ -107,7 +107,8 @@ function addEvent(item,callback){
 
   }else{
     var end = new Date(item.start);
-    end.setDate(item.start.getDate()+2);
+    // usually what we want is 1 hour event slots 
+    end.setHours(item.start.getHours()+1); 
     item.content = item.content.split(":")[1];
     item.end = end;
     var event = {
